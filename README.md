@@ -25,7 +25,9 @@ https://vmpo.tistory.com/6 등 다양한 블로그를 참고합니다.
 
 ### 2. Download
 
-소스를 다운로드할 경로에서 git clone 을 해줍니다.
+git이 설치되어 있어야 합니다. (git 설치는 인터넷을 참고하세요.)
+
+git clone로 파일을 다운로드할 곳을 소스경로로 지정하고, Git Bash에 아래의 명령어를 입력합니다.
 
 소스경로> git clone https://github.com/sungmin-net/java-mdmServer-courseWork.git
 
@@ -33,7 +35,7 @@ https://vmpo.tistory.com/6 등 다양한 블로그를 참고합니다.
 
 ### 3. Import
 
-Eclipse -> File -> Import -> Existing Projects into Work space -> Select root directory -> git clone 한 디렉토리 선택 -> Finish
+설치된 Eclipse를 열어서 상단 메뉴에 File -> Import -> Existing Projects into Work space -> Select root directory -> git clone 한 디렉토리 선택 -> Finish
 
 ##### 3.1. 이클립스 프로젝트에 빨간 엑스가 생기면?
 
@@ -43,11 +45,11 @@ Eclipse -> File -> Import -> Existing Projects into Work space -> Select root di
 
 ### 4. Run
 
-이클립스의 기본 실행 단축키는 Ctrl + F11 일겁니다. 서버 코드(MdmServerMain.java)를 실행했을 때 다음의 텍스트가 콘솔에 뜨면 정상입니다.
+이클립스의 기본 실행 단축키는 Ctrl + F11 일겁니다. 서버 코드(MdmServerMain.java/ src > (default package) 안에 있습니다.)를 실행했을 때 다음의 텍스트가 콘솔에 뜨면 정상입니다.
 
 [21.08.09 21:31:24] Wait for the client request
 
-관리자 콘솔은 UI가 ~~아직?~~ 없습니다. MdmAdminMain 을 실행하면 관련된 내용이 ServerPolicies.json 에 기록됩니다.
+관리자 콘솔은 UI가 ~~아직?~~ 없습니다. MdmAdminMain 을 Ctrl + F11 로 실행하면 관련된 내용이 ServerPolicies.json 에 기록됩니다.
 
 ##### 4.1. Error: LinkageError occurred while loading main class MdmServerMain
 
