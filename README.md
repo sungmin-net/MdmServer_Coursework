@@ -63,7 +63,7 @@ Eclipse -> Project -> Clean -> 'Clean all projects' 체크 해제하고, UranPol
 
 ### 5. Upload
 
-Eclipse -> File -> Export -> General -> File System -> 작업한 프로젝트 선택 -> Finish 로 임의 경로로 떨군 후에, git clone 한 디렉토리에서 (중요) git pull 후, 수정한 파일을 복사하고 커밋을 작성하고 push 하는 것을 권장합니다. 
+Eclipse -> File -> Export -> General -> File System -> 작업한 프로젝트 선택 -> Finish 로 임의 경로로 떨군 후에, git clone 한 디렉토리에서 **git pull 후**, 수정한 파일을 복사하고 커밋을 작성하고 push 하는 것을 권장합니다. 
 
 
 
@@ -77,6 +77,6 @@ keytool -genkeypair -rfc -keyalg rsa -keysize 2048 -keystore UranMdmServer.p12 -
 
 ##### 6.2. Protocol
 
-Client→Server: Magic + RsaEnc(Version + Cmd + UserId) + ServAlias
+Client→Server: Magic + RsaEnc(Version + Cmd + UserId + Nonce) + ServAlias
 
-Client←Server: Magic + ToBeSigned(Version + TimeStamp + CurPolicies) + ServSign
+Client←Server: Magic + ToBeSigned(Version + Nonce + CurPolicies) + ServSign
