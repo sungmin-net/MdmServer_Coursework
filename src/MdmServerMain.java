@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -134,13 +135,12 @@ public class MdmServerMain {
 
         JSONObject toBeSigned = new JSONObject();
         toBeSigned.put(Payload.VERSION, "0.1");
-        toBeSigned.put(Payload.TIME_STAMP, getTime());
+        toBeSigned.put(Payload.NONCE, mCurClientMsg.get(Payload.NONCE));
 
         if (mCurClientMsg.get(Payload.CMD).equals(Payload.CLIENT_REQUEST_POLICIES)) {
             toBeSigned.put(Payload.SERVER_REPLY_POLICIES, loadServerPolicies());
         }
         reply.put(Payload.TO_BE_SIGNED, toBeSigned);
-
         reply.put(Payload.SERVER_SIGN, getSign(toBeSigned.toString()));
 
         return reply.toString();
@@ -168,13 +168,15 @@ public class MdmServerMain {
             Signature signer = Signature.getInstance("RSASSA-PSS");
             signer.setParameter(new PSSParameterSpec("SHA-256", "MGF1", MGF1ParameterSpec.SHA256,
                     32, 1));
+//            Signature signer = Signature.getInstance("SHA256withRSA");
             signer.initSign(privKey);
-            signer.update(toBeSignedStr.getBytes());
+            signer.update(toBeSignedStr.getBytes("UTF8"));
             byte[] signBytes = signer.sign();
             ret = Base64.getEncoder().encodeToString(signBytes);
 
         } catch (UnrecoverableKeyException | KeyStoreException | NoSuchAlgorithmException
-                | InvalidKeyException| SignatureException | InvalidAlgorithmParameterException e) {
+                | InvalidKeyException| SignatureException | UnsupportedEncodingException
+                | InvalidAlgorithmParameterException e) {
             e.printStackTrace();
         }
 
@@ -192,6 +194,7 @@ public class MdmServerMain {
         mCurClientMsg.put(Payload.VERSION, obj.get(Payload.VERSION));
         mCurClientMsg.put(Payload.CMD, obj.get(Payload.CMD));
         mCurClientMsg.put(Payload.USER_ID, obj.get(Payload.USER_ID));
+        mCurClientMsg.put(Payload.NONCE, obj.get(Payload.NONCE));
 
     }
 

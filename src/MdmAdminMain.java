@@ -13,7 +13,7 @@ public class MdmAdminMain {
         JSONObject serverPolicies = new JSONObject();
 
         // TODO add restriction policy if needed
-        serverPolicies.put(Payload.POLICY_ALLOW_CAMERA, true);
+        serverPolicies.put(Payload.POLICY_ALLOW_CAMERA, false);
 
         System.out.println(serverPolicies);
 
